@@ -5,13 +5,19 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
+
+<c:if test="${sessionScope.username == null}">
+    <c:redirect url="../JavaWebProduct/admin/error"></c:redirect>
+</c:if>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard 2</title>
-
+  <title>Quản Lý Sản Phẩm</title>
+  <link rel="icon" type="image/png" href="../../JavaWebProduct/assets/web/img/icons/favicon.ico"/>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -127,31 +133,11 @@
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+      <li class="nav-item ">
+        <a class="nav-link"  href="<%=request.getContextPath()%>/admin/logout">
+          <i class="fas fa-power-off"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
+       
       </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -183,8 +169,11 @@
           <img src="../../JavaWebProduct/assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+       <!--Quản lý thông tin cá nhân --> 
+       <a href="<%=request.getContextPath()%>/admin/profile" class="d-block">${sessionScope.username.username}</a>
+          
         </div>
+            
       </div>
 
       <!-- SidebarSearch Form -->
@@ -205,7 +194,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+            <a href="<%=request.getContextPath()%>/dashboard" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -232,12 +221,28 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/kanban.html" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
                 Quản Lý Tài Khoản
+                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="<%=request.getContextPath()%>/customer-manager" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Tài khoản khách hàng</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<%=request.getContextPath()%>/employee" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Tài khoản nhân viên</p>
+                    </a>
+                  </li>
+                  
+                </ul>
           </li>
 <!--          <li class="nav-item">
             <a href="#" class="nav-link">

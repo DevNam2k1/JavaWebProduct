@@ -147,7 +147,27 @@ public class ProductController extends HttpServlet {
     }
 
     private void listProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> listProduct = productDAO.findAll();
+        int total = 5;
+        String start = request.getParameter("page");
+        if(start == null){
+         start = "1";
+        }
+        
+        int page = Integer.parseInt(start);
+        
+        if(page != 1){
+        page = page - 1;
+        page = page*total + 1;
+        }
+        int count = this.productDAO.getTotalProduct();
+        int totalPage = count/total;
+        if(totalPage % total != 0){
+            totalPage++;
+        }
+        
+        List<Product> listProduct = productDAO.findAll(page, total);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("start", start);
         request.setAttribute("listProduct", listProduct);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/admin/product/list.jsp");
         dispatcher.forward(request, response);

@@ -4,6 +4,7 @@
     Author     : laptop88
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -13,8 +14,8 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
-
+    <title>Ogani | Sản phẩm tươi sạch</title>
+    <link rel="icon" type="image/png" href="assets/web/img/icons/favicon.ico"/>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
@@ -43,8 +44,8 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="#"><i class="fa fa-heart"></i> <span>4</span></a></li>
+                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>5</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
@@ -59,24 +60,33 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Đăng Nhập / Đăng Kí</a>
+               <c:if test="${sessionScope.customer == null}">
+                        <div class="header__top__right__auth">
+                               <a href="<%=request.getContextPath()%>/login-form"><i class="fa fa-user"></i> Đăng Nhập / Đăng Kí</a>
+                        </div>
+               </c:if>
+               <c:if test="${sessionScope.customer != null}">
+                        <div class="header__top__right__auth">
+                               <a href="<%=request.getContextPath()%>/login-form"><i class="fa fa-user"></i> Namsky1812 </a>
+                        </div>
+               </c:if>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index">Trang Chủ</a></li>
-                <li><a href="./shop-grid">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog">Tin Tức</a></li>
-                <li><a href="./contact">Liên Hệ</a></li>
-            </ul>
+                            <li class="active"><a href="./">Trang Chủ</a></li>
+                            <li><a href="./shop-grid">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="header__menu__dropdown">
+                                    <li><a href="./shop-details">Shop Details</a></li>
+                                    <li><a href="./shoping-cart">Shoping Cart</a></li>
+                                    <li><a href="./checkout">Check Out</a></li>
+                                    <li><a href="./blog-details">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./blog">Tin Tức</a></li>
+                            <li><a href="./contact">Liên Hệ</a></li>
+           </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
         <div class="header__top__right__social">
@@ -120,13 +130,20 @@
                                 <div>English</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
-                                    <li><a href="#">Spanis</a></li>
+                                    <li><a href="#">Viet Nam</a></li>
                                     <li><a href="#">English</a></li>
                                 </ul>
                             </div>
+                            <c:if test="${sessionScope.customer == null}">
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <a href="<%=request.getContextPath()%>/login-form"><i class="fa fa-user"></i> Đăng Nhập / Đăng Kí</a>
                             </div>
+                            </c:if>
+                            <c:if test="${sessionScope.customer != null}">
+                                <div class="header__top__right__auth">
+                                <a href="<%=request.getContextPath()%>/login-form"><i class="fa fa-user"></i> Namsky1812 </a>
+                            </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>

@@ -25,10 +25,10 @@ public class ProductDAO implements IProductDAO{
         " (?, ?, ?, ?, ?, ?);";
 
     private static final String SELECT_PRODUCT_BY_ID = "SELECT id,name,image,price,title,description,amount from products where id =?";
-    private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM products";
+//    private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM products LIMIT "+ (start - 1) +", " + total;
     private static final String DELETE_PRODUCTS_SQL = "DELETE FROM products where id = ?;";
     private static final String UPDATE_PRODUCTS_SQL = "update products set name = ?,image= ?, price =?, title=?, description=?, amount=? where id = ?;";
-
+    private static final String TOTAL_PRODUCTS_SQL = "SELECT count(*) FROM products";
 
     @Override
     public Product findProductById(Integer id) {
@@ -65,16 +65,17 @@ public class ProductDAO implements IProductDAO{
     public List<Product> findProductByProductName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    //In ra tất cả sản phẩm và phân trang
     @Override
-    public List<Product> findAll()  {
+    public List<Product> findAll(int start, int total)  {
 
         List<Product> products = new ArrayList<>();
         // Step 1: Establishing a Connection (Thiết lập kết nối)
         try (Connection connection =Connector.getConnection();
 
             // Step 2:Create a statement using connection object (Tạo một câu lệnh bằng cách sử dụng đối tượng kết nối)
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_PRODUCTS);) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM products LIMIT "+ (start - 1) +", " + total)) {
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query (Thực thi truy vấn hoặc cập nhật truy vấn)
             ResultSet rs = preparedStatement.executeQuery();
@@ -166,11 +167,33 @@ public class ProductDAO implements IProductDAO{
     public static void main(String[] args) {
 		ProductDAO dao = new ProductDAO();
 		
-		List<Product> list = dao.findAll();
+		List<Product> list = dao.findAll(1,5);
 		
 		for (Product product : list) {
 			System.out.println(product);
 		}
 	}
+
+    @Override
+    public int getTotalProduct() {
+        // Step 1: Establishing a Connection
+        try (Connection connection = Connector.getConnection();
+            // Step 2:Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(TOTAL_PRODUCTS_SQL);) {
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+
+                    return rs.getInt(1);
+               
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return 0;
+           }
 
 }

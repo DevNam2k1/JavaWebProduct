@@ -77,7 +77,7 @@
                           <i class="far fa-edit text-success" ></i>
                           </a></td>
                       <td><a onClick="return confirm('Bạn có chắc muốn xóa môn học này không?')" href="<%=request.getContextPath()%>/product/delete?id=${p.id}"  class="active styling-edit" ui-toggle-class="">
-                          <i class="fa fa-times text-danger "></i></a>
+                          <i class="fa fa-times text-danger "></i>
                           </a></td>
    
                     </tr>
@@ -86,7 +86,21 @@
                 </table>
               </div>
               <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                    <c:if test="${start != 1}">
+                  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/product?page=${start-1}">«</a></li>
+                    </c:if>
+                  <c:forEach begin="1" end="${totalPage}" var="i">
+                  <li class="page-item ${start == i ? "active":""}"><a class="page-link" href="<%=request.getContextPath()%>/product?page=${i}">${i}</a></li>
+                  </c:forEach>
+                  <c:if test="${start != totalPage}">
+                  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/product?page=${start+1}">»</a></li>
+                  </c:if>
+                </ul>
+              </div>
             </div>
+              
             <!-- /.card -->
           </div>
         </div>
