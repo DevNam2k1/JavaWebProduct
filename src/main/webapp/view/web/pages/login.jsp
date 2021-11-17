@@ -13,26 +13,26 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="../../../JavaWebProduct/assets/web/img/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="./assets/web/img/icons/favicon.ico"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../../JavaWebProduct/assets/web/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./assets/web/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../../JavaWebProduct/assets/web/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="./assets/web/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../../JavaWebProduct/assets/web/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="./assets/web/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../../JavaWebProduct/assets/web/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="./assets/web/vendor/animate/animate.css">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="../../../JavaWebProduct/assets/web/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="./assets/web/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../../JavaWebProduct/assets/web/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="./assets/web/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../../JavaWebProduct/assets/web/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="./assets/web/vendor/select2/select2.min.css">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="../../../JavaWebProduct/assets/web/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="./assets/web/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../../JavaWebProduct/assets/web/css/util.css">
-	<link rel="stylesheet" type="text/css" href="../../../JavaWebProduct/assets/web/css/main.css">
+	<link rel="stylesheet" type="text/css" href="./assets/web/css/util.css">
+	<link rel="stylesheet" type="text/css" href="./assets/web/css/main.css">
 <!--===============================================================================================-->
 </head>
 <body style="background-color: #666666;">

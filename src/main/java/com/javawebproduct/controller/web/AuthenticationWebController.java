@@ -174,9 +174,7 @@ public class AuthenticationWebController extends HttpServlet {
 
         System.out.println("Session đã bị xóa");
 
-        RequestDispatcher dispatcher = 
-                        request.getRequestDispatcher("index.jsp");
-                        dispatcher.forward(request, response);
+        response.sendRedirect("/JavaWebProduct/");
     }
 
     private void profile(HttpServletRequest request, HttpServletResponse response) {

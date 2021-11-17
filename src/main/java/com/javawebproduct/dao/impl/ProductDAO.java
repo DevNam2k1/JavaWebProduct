@@ -29,6 +29,8 @@ public class ProductDAO implements IProductDAO{
     private static final String DELETE_PRODUCTS_SQL = "DELETE FROM products where id = ?;";
     private static final String UPDATE_PRODUCTS_SQL = "update products set name = ?,image= ?, price =?, title=?, description=?, amount=? where id = ?;";
     private static final String TOTAL_PRODUCTS_SQL = "SELECT count(*) FROM products";
+    private static final String TOTAL_PRODUCTS_BY_NAME_SQL = "SELECT count(*) FROM products where name like ?";
+//    private static final String SEARCH_BY_NAME = "SELECT * FROM products where name like ?";
 
     @Override
     public Product findProductById(Integer id) {
@@ -62,8 +64,33 @@ public class ProductDAO implements IProductDAO{
     }
 
     @Override
-    public List<Product> findProductByProductName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Product> findProductByProductName(int start,int total, String nameProduct) {
+         List<Product> products = new ArrayList<>();
+        // Step 1: Establishing a Connection (Thiết lập kết nối)
+        try (Connection connection =Connector.getConnection();
+
+            // Step 2:Create a statement using connection object (Tạo một câu lệnh bằng cách sử dụng đối tượng kết nối)
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM products where name like ? LIMIT "+ (start - 1) +", " + total );) {
+            System.out.println(preparedStatement);
+            preparedStatement.setString(1,"%"+nameProduct+"%");
+            // Step 3: Execute the query or update query (Thực thi truy vấn hoặc cập nhật truy vấn)
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.(Xử lý đối tượng ResultSet)
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String image = rs.getString("image");
+                double price = rs.getDouble("price");
+                String title = rs.getString("title");
+                int amount = rs.getInt("amount");
+                String description = rs.getString("description");
+                products.add(new Product(id, name, image, price, title, description, amount));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return products;
     }
     
     //In ra tất cả sản phẩm và phân trang
@@ -195,5 +222,29 @@ public class ProductDAO implements IProductDAO{
         }
         return 0;
            }
+
+    @Override
+    public int getTotalProduct(String nameProduct) {
+           // Step 1: Establishing a Connection
+        try (Connection connection = Connector.getConnection();
+            // Step 2:Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(TOTAL_PRODUCTS_BY_NAME_SQL);) {
+            preparedStatement.setString(1, nameProduct);
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+
+                    return rs.getInt(1);
+               
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return 0;
+           
+    }
 
 }

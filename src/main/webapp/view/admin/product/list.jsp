@@ -34,18 +34,23 @@
             <div class="card">
               <div class="card-header">
                   <h3 class="card-title"><a href="../JavaWebProduct/product/new"><button type="button" class="btn btn-block btn-outline-success">+ Thêm sản phẩm</button></a></h3>
-
+       
                 <div class="card-tools">
+                     <form action="<%=request.getContextPath()%>/product/search" method="post">
                   <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
+                     
+                    <input type="text" name="productName" value="${searchName}"class="form-control float-right" placeholder="Search">
+                      
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-default">
                         <i class="fas fa-search"></i>
                       </button>
+                       
                     </div>
                   </div>
+                    </form>
                 </div>
+                     
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
@@ -68,11 +73,11 @@
                     <tr>
                       <td>${p.id}</td>
                       <td>${p.name}</td>
-                      <td><img src="" style="width: 100px; height: 100px;"></td>
-                      <td><span class="tag tag-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      <td>John Doe</td>
-                      <td>John Doe</td>
+                      <td><img src="../../../JavaWebProduct/assets/web/img/product/${p.image}" style="width: 100px; height: 100px;"></td>
+                      <td><span class="tag tag-success">${p.price}</span></td>
+                      <td>${p.description}</td>
+                      <td>${p.title}</td>
+                      <td>${p.amount}</td>
                       <td><a href="<%=request.getContextPath()%>/product/edit?id=${p.id}" class="active styling-edit " ui-toggle-class="" >
                           <i class="far fa-edit text-success" ></i>
                           </a></td>

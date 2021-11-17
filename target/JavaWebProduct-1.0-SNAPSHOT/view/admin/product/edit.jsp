@@ -35,7 +35,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="../product/update" method="post">
+              <form action="../product/update" method="post" >
                   <input type="hidden" name="id" value="${product.id}" />
                 <div class="card-body">
                   <div class="form-group">
@@ -47,7 +47,8 @@
                     <input type="number"  name="price" value="${product.price}" class="form-control" id="exampleInputPrice" placeholder="VD: 300000,...">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputFile">Ảnh Sản Phẩm</label>
+                      <label for="exampleInputFile">Ảnh Sản Phẩm</label><br>
+                    <img src="../../../JavaWebProduct/assets/web/img/product/${product.image}" style="width: 100px; height: 100px;"/>
                     <div class="input-group">
                       <div class="custom-file">
                         <input type="file"  name="image" value="${product.image}" class="custom-file-input" id="exampleInputFile">

@@ -123,7 +123,11 @@
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                                 <c:if test="${sessionScope.customer != null}">
+                                <a href="<%=request.getContextPath()%>/logout">
+                                     <i class="fa fa-power-off"></i>
+                                </a>
+                                 </c:if>
                             </div>
                             <div class="header__top__right__language">
                                 <img src="assets/web/img/language.png" alt="">
