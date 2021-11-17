@@ -33,7 +33,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="../product/create" method="post">
+              <form action="../product/create" method="post" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputProductName">Tên Sản Phẩm*</label>

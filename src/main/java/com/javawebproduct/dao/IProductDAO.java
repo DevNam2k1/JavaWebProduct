@@ -17,10 +17,10 @@ public interface IProductDAO {
     Product findProductById(Integer id);
     
     //Tím kiếm sản phẩm bằng tên
-    List<Product> findProductByProductName(String name);
+    List<Product> findProductByProductName(int start, int total, String nameProduct);
     
     //In ra tất cả sản phẩm
-    List<Product> findAll();
+    List<Product> findAll(int start,int total);
     
     //Thêm sản phẩm
     void insertProduct(Product product);
@@ -30,4 +30,12 @@ public interface IProductDAO {
     
     //Xóa sản phẩm
     boolean deleteProductById(int id);
+    
+    //Đếm số lượng sản phẩm
+    int getTotalProduct();
+    
+    //Đếm số lượng sản phẩm khi search
+    int getTotalProduct(String nameProduct);
+    
+
 }

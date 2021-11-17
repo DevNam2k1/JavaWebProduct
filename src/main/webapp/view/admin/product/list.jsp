@@ -34,18 +34,23 @@
             <div class="card">
               <div class="card-header">
                   <h3 class="card-title"><a href="../JavaWebProduct/product/new"><button type="button" class="btn btn-block btn-outline-success">+ Thêm sản phẩm</button></a></h3>
-
+       
                 <div class="card-tools">
+                     <form action="<%=request.getContextPath()%>/product/search" method="post">
                   <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
+                     
+                    <input type="text" name="productName" value="${searchName}"class="form-control float-right" placeholder="Search">
+                      
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-default">
                         <i class="fas fa-search"></i>
                       </button>
+                       
                     </div>
                   </div>
+                    </form>
                 </div>
+                     
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
@@ -68,16 +73,16 @@
                     <tr>
                       <td>${p.id}</td>
                       <td>${p.name}</td>
-                      <td><img src="" style="width: 100px; height: 100px;"></td>
-                      <td><span class="tag tag-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      <td>John Doe</td>
-                      <td>John Doe</td>
+                      <td><img src="../../../JavaWebProduct/assets/web/img/product/${p.image}" style="width: 100px; height: 100px;"></td>
+                      <td><span class="tag tag-success">${p.price}</span></td>
+                      <td>${p.description}</td>
+                      <td>${p.title}</td>
+                      <td>${p.amount}</td>
                       <td><a href="<%=request.getContextPath()%>/product/edit?id=${p.id}" class="active styling-edit " ui-toggle-class="" >
                           <i class="far fa-edit text-success" ></i>
                           </a></td>
                       <td><a onClick="return confirm('Bạn có chắc muốn xóa môn học này không?')" href="<%=request.getContextPath()%>/product/delete?id=${p.id}"  class="active styling-edit" ui-toggle-class="">
-                          <i class="fa fa-times text-danger "></i></a>
+                          <i class="fa fa-times text-danger "></i>
                           </a></td>
    
                     </tr>
@@ -86,7 +91,21 @@
                 </table>
               </div>
               <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                    <c:if test="${start != 1}">
+                  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/product?page=${start-1}">«</a></li>
+                    </c:if>
+                  <c:forEach begin="1" end="${totalPage}" var="i">
+                  <li class="page-item ${start == i ? "active":""}"><a class="page-link" href="<%=request.getContextPath()%>/product?page=${i}">${i}</a></li>
+                  </c:forEach>
+                  <c:if test="${start != totalPage}">
+                  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/product?page=${start+1}">»</a></li>
+                  </c:if>
+                </ul>
+              </div>
             </div>
+              
             <!-- /.card -->
           </div>
         </div>

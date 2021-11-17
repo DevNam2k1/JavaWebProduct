@@ -1642,6 +1642,10 @@ ol {
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
 }
+.product__pagination a:active {
+    color: white;
+    background: #7fad39;
+}
 
 .product__pagination a:hover,
 .blog__pagination a:hover {

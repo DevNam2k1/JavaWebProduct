@@ -12,10 +12,23 @@
         <servlet-name>ProductWebController</servlet-name>
         <servlet-class>com.javawebproduct.controller.web.ProductWebController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AuthenticationWebController</servlet-name>
+        <servlet-class>com.javawebproduct.controller.web.AuthenticationWebController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerController</servlet-name>
+        <servlet-class>com.javawebproduct.controller.admin.CustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerWebController</servlet-name>
+        <servlet-class>com.javawebproduct.controller.web.CustomerWebController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductController</servlet-name>
         <url-pattern>/product</url-pattern>
         <url-pattern>/product/new</url-pattern>
+        <url-pattern>/product/search</url-pattern>
         <url-pattern>/product/create</url-pattern>
         <url-pattern>/product/delete</url-pattern>
         <url-pattern>/product/edit</url-pattern>
@@ -23,13 +36,39 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Authentication</servlet-name>
-        <url-pattern>/view/admin/login-user</url-pattern>
-        <url-pattern>/login/form</url-pattern>
+        <url-pattern>/admin/login</url-pattern>
+        <url-pattern>/admin/logout</url-pattern>
+        <url-pattern>/admin/error</url-pattern>
+        <url-pattern>/admin</url-pattern>
+        <url-pattern>/employee</url-pattern>
+        <url-pattern>/employee/new</url-pattern>
+        <url-pattern>/employee/store</url-pattern>
         <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductWebController</servlet-name>
         <url-pattern>/shop-grid</url-pattern>
+        <url-pattern>/blog</url-pattern>
+        <url-pattern>/contact</url-pattern>
+        <url-pattern>/search</url-pattern>
+        <url-pattern>/shop-details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthenticationWebController</servlet-name>
+        <url-pattern>/login-form</url-pattern>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/reigster-form</url-pattern>
+        <url-pattern>/reigster</url-pattern>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerController</servlet-name>
+        <url-pattern>/customer-manager</url-pattern>
+        <url-pattern>/disable-customer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerWebController</servlet-name>
+        <url-pattern>/CustomerWebController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

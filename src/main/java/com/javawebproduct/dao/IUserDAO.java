@@ -6,6 +6,7 @@
 package com.javawebproduct.dao;
 
 import com.javawebproduct.bean.User;
+import java.util.List;
 
 /**
  *
@@ -19,5 +20,15 @@ public interface IUserDAO {
      * @param password
      * @return
      */
+    //Đăng nhập tài khoản nhân viên
     public User login(String email, String password);
+    
+    //Đăng kí tài khoản cho nhân viên
+    void insertUser (User user);
+    
+    //Hiển thị tài khoản nhân viên
+    public List<User> findAll(int start,int total);
+    
+    //Đếm số lượng nhân viên
+    int getTotalUser();
 }

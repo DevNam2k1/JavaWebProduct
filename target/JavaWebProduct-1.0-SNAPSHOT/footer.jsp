@@ -4,6 +4,7 @@
     Author     : laptop88
 --%>
    <!-- Footer Section Begin -->
+   <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <footer class="footer spad">
         <div class="container">
             <div class="row">
@@ -13,9 +14,9 @@
                             <a href="./index.html"><img src="img/logo.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
+                            <li>Address: Đạo Tặc - Hà Nội</li>
                             <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                            <li>Email: fboy2k1@gmail.com</li>
                         </ul>
                     </div>
                 </div>

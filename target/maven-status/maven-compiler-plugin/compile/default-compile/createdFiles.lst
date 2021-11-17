@@ -1,1 +1,16 @@
+com\javawebproduct\controller\admin\ProductController.class
+com\javawebproduct\controller\web\CustomerWebController.class
+com\javawebproduct\bean\Customer.class
+com\javawebproduct\dao\impl\CustomerDAO.class
+com\javawebproduct\dao\impl\UserDAO.class
+com\javawebproduct\bean\User.class
+com\javawebproduct\controller\admin\Authentication.class
+com\javawebproduct\dao\IProductDAO.class
 com\javawebproduct\controller\web\ProductWebController.class
+com\javawebproduct\dao\ICustomerDAO.class
+com\javawebproduct\dao\IUserDAO.class
+com\javawebproduct\controller\admin\CustomerController.class
+com\javawebproduct\connection\Connector.class
+com\javawebproduct\controller\web\AuthenticationWebController.class
+com\javawebproduct\bean\Product.class
+com\javawebproduct\dao\impl\ProductDAO.class

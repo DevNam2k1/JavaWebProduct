@@ -39,6 +39,8 @@
 <script src="../../JavaWebProduct/assets/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../../JavaWebProduct/assets/dist/js/pages/dashboard2.js"></script>
+<!-- Bootstrap Switch -->
+<script src="../../JavaWebProduct/assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 </body>
 </html>
 

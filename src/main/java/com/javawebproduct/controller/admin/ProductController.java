@@ -10,20 +10,20 @@ import com.javawebproduct.dao.impl.ProductDAO;
 
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author laptop88
  */
-//@WebServlet("/product")
+@MultipartConfig
 public class ProductController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -59,6 +59,9 @@ public class ProductController extends HttpServlet {
                 break;
             case "/product/update":
                 this.updateProduct(request, response);
+                break;
+            case "/product/search":
+                this.searchByProductName(request, response);
                 break;
             case "/product":
                 this.listProduct(request, response);
@@ -112,9 +115,14 @@ public class ProductController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void insertProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void insertProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String name = request.getParameter("name");
-        String image = request.getParameter("image");
+        //Lưu ảnh vào folder upload
+        Part fileImage = request.getPart("image");
+        String image = fileImage.getSubmittedFileName();
+        for(Part part : request.getParts()){
+            part.write("C:\\Users\\laptop88\\OneDrive\\Máy tính\\JavaPrograms\\JavaWebProduct\\src\\main\\webapp\\assets\\upload\\"+ image);
+        }
         double price = Double.parseDouble(request.getParameter("price"));
         String title = request.getParameter("title");
         String description = request.getParameter("description");
@@ -132,10 +140,15 @@ public class ProductController extends HttpServlet {
         response.sendRedirect("/JavaWebProduct/product");
     }
 
-    private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        String image = request.getParameter("image");
+        //Lưu ảnh vào folder upload
+        Part fileImage = request.getPart("image");
+        String image = fileImage.getSubmittedFileName();
+        for(Part part : request.getParts()){
+            part.write("C:\\Users\\laptop88\\OneDrive\\Máy tính\\JavaPrograms\\JavaWebProduct\\src\\main\\webapp\\assets\\upload\\"+ image);
+        }
         double price = Double.parseDouble(request.getParameter("price"));
         String title = request.getParameter("title");
         String description = request.getParameter("description");
@@ -147,7 +160,27 @@ public class ProductController extends HttpServlet {
     }
 
     private void listProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> listProduct = productDAO.findAll();
+        int total = 5;
+        String start = request.getParameter("page");
+        if(start == null){
+         start = "1";
+        }
+        
+        int page = Integer.parseInt(start);
+        
+        if(page != 1){
+        page = page - 1;
+        page = page*total + 1;
+        }
+        int count = this.productDAO.getTotalProduct();
+        int totalPage = count/total;
+        if(totalPage % total != 0){
+            totalPage++;
+        }
+        
+        List<Product> listProduct = productDAO.findAll(page, total);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("start", start);
         request.setAttribute("listProduct", listProduct);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/admin/product/list.jsp");
         dispatcher.forward(request, response);
@@ -160,6 +193,37 @@ public class ProductController extends HttpServlet {
         System.out.println(existingProduct);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/view/admin/product/edit.jsp");
         request.setAttribute("product", existingProduct);
+        dispatcher.forward(request, response);
+    }
+
+    private void searchByProductName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String productName = request.getParameter("productName");
+        int total = 5;
+        String start = request.getParameter("page");
+        if(start == null){
+         start = "1";
+        }
+        
+        int page = Integer.parseInt(start);
+        
+        if(page != 1){
+        page = page - 1;
+        page = page*total + 1;
+        }
+        int count = this.productDAO.getTotalProduct(productName);
+        int totalPage = count/total;
+        if(totalPage % total != 0){
+            totalPage++;
+        }
+        //Đẩy dữ liệu lên JSP
+        request.setAttribute("searchName",productName);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("start", start);
+        List<Product> listProduct = productDAO.findProductByProductName(page, total, productName);
+        request.setAttribute("listProduct", listProduct);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/admin/product/list.jsp");
         dispatcher.forward(request, response);
     }
 

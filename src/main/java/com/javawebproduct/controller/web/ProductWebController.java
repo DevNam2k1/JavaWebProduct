@@ -43,6 +43,18 @@ public class ProductWebController extends HttpServlet {
             case "/shop-grid":
                 this.listProduct(request, response);
                 break;
+            case "/search":
+                this.searchByProductName(request, response);
+                break;
+            case "/blog":
+                this.showBlog(request, response);
+                break;
+            case "/contact":
+                this.showContact(request, response);
+                break;
+            case "/shop-details":
+                this.showShopDetails(request, response);
+                break;
             default:
                 break;
         }
@@ -88,10 +100,85 @@ public class ProductWebController extends HttpServlet {
     }// </editor-fold>
 
     private void listProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> listProduct = productDAO.findAll();
+        int total = 5;
+        String start = request.getParameter("page");
+        if(start == null){
+         start = "1";
+        }
+        
+        int page = Integer.parseInt(start);
+        
+        if(page != 1){
+        page = page - 1;
+        page = page*total + 1;
+        }
+        int count = this.productDAO.getTotalProduct();
+        int totalPage = count/total;
+        if(totalPage % total != 0){
+            totalPage++;
+        }
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("start", start);
+        List<Product> listProduct = productDAO.findAll(page, total);
         request.setAttribute("listProduct", listProduct);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/view/web/shop-grid.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void searchByProductName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String productName = request.getParameter("productName");
+        int total = 5;
+        String start = request.getParameter("page");
+        if(start == null){
+         start = "1";
+        }
+        
+        int page = Integer.parseInt(start);
+        
+        if(page != 1){
+        page = page - 1;
+        page = page*total + 1;
+        }
+        int count = this.productDAO.getTotalProduct(productName);
+        int totalPage = count/total;
+        if(totalPage % total != 0){
+            totalPage++;
+        }
+        //Đẩy dữ liệu lên JSP
+        request.setAttribute("searchName",productName);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("start", start);
+        List<Product> listProduct = productDAO.findProductByProductName(page, total, productName);
+        request.setAttribute("listProduct", listProduct);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/web/shop-grid.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showBlog(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = 
+		request.getRequestDispatcher("/view/web/shop-blog.jsp");
+                dispatcher.forward(request, response);
+    }
+
+    private void showContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                RequestDispatcher dispatcher = 
+		request.getRequestDispatcher("/view/web/shop-contant.jsp");
+                dispatcher.forward(request, response);    
+    }
+
+    private void showShopDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        
+        int productId = Integer.parseInt(request.getParameter("product"));
+        
+        Product detailsProduct = productDAO.findProductById(productId);
+        
+        request.setAttribute("productDetails", detailsProduct);
+        RequestDispatcher dispatcher = 
+		request.getRequestDispatcher("/view/web/shop-details.jsp");
+                dispatcher.forward(request, response);
     }
 
 }
